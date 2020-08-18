@@ -9,6 +9,9 @@ module.exports = function(app) {
 				
     app.route('/api/v1/posts')
 			.get(blog.getAllBlogPosts);
+
+		app.route('/api/v1/posts/:id')
+			.get(blog.getSinglePost);
 				
 		app.route('/api/v1/posts')
 			.post(blog.createBlogPost);

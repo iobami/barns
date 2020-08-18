@@ -40,16 +40,28 @@ const createBlogPost = async (req, res) => {
 	}
 };
 
-// const read_a_task = (req, res) => {
-// 	Task.findById(req.params.id, function(err, task) {
+const getSinglePost = async (req, res) => {
+	try {
+		const post = await Posts.findById(req.params.id);
+		res.json({
+			status: 'success',
+			message: 'Retrieved post',
+			data: post
+		});
+	} catch (e) {
+		res.send(e);
+	}
+};
+
+// const delete_a_task = (req, res) => {
+
+// const update_a_task = (req, res) => {
+// 	Task.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, task) {
 // 			if (err)
 // 					res.send(err);
 // 			res.json(task);
 // 	});
 // };
-
-// const delete_a_task = (req, res) => {
-
 
 // 	Task.deleteOne({
 // 			_id: req.params.id
@@ -62,4 +74,5 @@ const createBlogPost = async (req, res) => {
 
 module.exports = {
 	getDefault, getAllBlogPosts, createBlogPost,
+	getSinglePost,
 };
