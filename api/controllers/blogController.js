@@ -53,26 +53,37 @@ const getSinglePost = async (req, res) => {
 	}
 };
 
-// const delete_a_task = (req, res) => {
+const updateSinglePost = async (req, res) => {
+	try {
+		const post = await Posts.findOneAndUpdate({_id: req.params.id}, req.body, {new: true});
+		res.json({
+			status: 'success',
+			message: 'Updated post',
+			data: post
+		});
+	} catch (e) {
+		res.send(e);
+	}
+};
 
-// const update_a_task = (req, res) => {
-// 	Task.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function(err, task) {
-// 			if (err)
-// 					res.send(err);
-// 			res.json(task);
-// 	});
-// };
-
-// 	Task.deleteOne({
-// 			_id: req.params.id
-// 	}, function(err) {
-// 			if (err)
-// 					res.send(err);
-// 			res.json({ message: 'Task successfully deleted' });
-// 	});
-// };
+const deleteSinglePost = async (req, res) => {
+	try {
+		await Posts.deleteOne({ _id: req.params.id });
+		res.json({
+			status: 'success',
+			message: 'Deleted post',
+			data: {}
+		});
+	} catch (e) {
+		res.send(e);
+	}
+};
 
 module.exports = {
-	getDefault, getAllBlogPosts, createBlogPost,
+	getDefault,
+	getAllBlogPosts,
 	getSinglePost,
+	createBlogPost,
+	updateSinglePost,
+	deleteSinglePost,
 };

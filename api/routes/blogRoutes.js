@@ -8,12 +8,12 @@ module.exports = function(app) {
 			.get(blog.getDefault);
 				
     app.route('/api/v1/posts')
-			.get(blog.getAllBlogPosts);
+			.get(blog.getAllBlogPosts)
+			.post(blog.createBlogPost);
 
 		app.route('/api/v1/posts/:id')
-			.get(blog.getSinglePost);
-				
-		app.route('/api/v1/posts')
-			.post(blog.createBlogPost);
+			.get(blog.getSinglePost)
+			.put(blog.updateSinglePost)
+			.delete(blog.deleteSinglePost);
 
 };
